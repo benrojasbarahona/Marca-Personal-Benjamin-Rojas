@@ -3,8 +3,8 @@
 
 [salida]
 nombre = "bingo-2026.mp4"
-ancho = 1920          # PENDIENTE: marcador, confirmar formato del proyecto
-alto = 1080           # PENDIENTE: marcador, confirmar formato del proyecto
+ancho = 1080          # vertical (videos grabados en vertical)
+alto = 1920
 fps = 30
 
 [clips]
@@ -24,6 +24,6 @@ margen = 40                    # px desde el borde (ajustable)
 ancho = 260                    # px de ancho del banner (ajustable)
 
 [audio]
-musica = ""                    # ej: "banco/musica/tema.mp3"; vacío = sin música
+musica = "banco/musica/pista_audio.mp3"
 volumen_musica = 0.3           # ajustable
 volumen_original = 1.0         # ajustable

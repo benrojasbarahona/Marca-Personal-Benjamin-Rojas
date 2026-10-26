@@ -35,11 +35,19 @@ def leer_toml(p):
         return tomllib.load(f)
 
 
+def verificar_lfs(p):
+    """Detiene el render si el archivo es solo el puntero de Git LFS y no el archivo real."""
+    if p.stat().st_size < 1024 and p.read_bytes().startswith(b"version https://git-lfs"):
+        sys.exit(f"{p.name} es un puntero de Git LFS: el archivo real no se descargó. "
+                 "Revise que .gitattributes incluya su extensión y ejecute 'git lfs pull'.")
+
+
 def resolver(ruta, proyecto):
     """Ruta relativa al proyecto; si no existe ahí, relativa a la raíz del repo."""
     for base in (proyecto, RAIZ):
         p = (base / ruta).resolve()
         if p.exists():
+            verificar_lfs(p)
             return p
     sys.exit(f"No se encuentra '{ruta}' (se buscó en {proyecto} y en {RAIZ})")
 
@@ -272,6 +280,8 @@ def render(nombre):
         sys.exit(f"Faltan videos: {faltan}")
     if not clips:
         sys.exit(f"No hay videos en {media}")
+    for c in clips:
+        verificar_lfs(c)
     print(f"Proyecto {nombre}: {len(clips)} video(s)")
     for i, c in enumerate(clips, 1):
         print(f"  {i}. {c.name}")
