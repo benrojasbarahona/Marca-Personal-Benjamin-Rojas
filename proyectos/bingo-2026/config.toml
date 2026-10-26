@@ -21,9 +21,9 @@ modelo = "small"      # tiny, base, small, medium (más grande = más preciso y 
 archivo = "media/banner.png"   # dejar "" para no poner banner
 posicion = "arriba-derecha"    # arriba-derecha, arriba-izquierda, abajo-derecha, abajo-izquierda
 margen = 40                    # px desde el borde (ajustable)
-ancho = 260                    # px de ancho del banner (ajustable)
+ancho = 360                    # px de ancho del banner (antes 260; ajustable)
 
 [audio]
 musica = "banco/musica/pista_audio.mp3"
-volumen_musica = 0.3           # ajustable
+volumen_musica = 0.2           # antes 0.3; ajustable
 volumen_original = 1.0         # ajustable
