@@ -1,0 +1,4 @@
+proyectos/*/salida/*
+!proyectos/*/salida/.gitkeep
+__pycache__/
+.DS_Store

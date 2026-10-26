@@ -1,0 +1,47 @@
+name: Render
+
+on:
+  workflow_dispatch:
+    inputs:
+      proyecto:
+        description: "Nombre de la carpeta en proyectos/ (ej: bingo-2026)"
+        required: true
+        default: "bingo-2026"
+        type: string
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      PROYECTO: ${{ inputs.proyecto }}
+    steps:
+      - name: Validar nombre del proyecto
+        run: |
+          if [[ ! "$PROYECTO" =~ ^[A-Za-z0-9_-]+$ ]]; then
+            echo "Nombre de proyecto no válido: $PROYECTO"
+            exit 1
+          fi
+      - uses: actions/checkout@v7
+      - name: Descargar archivos LFS (solo este proyecto y banco/)
+        # bajar solo lo necesario ahorra ancho de banda de Git LFS
+        run: git lfs pull --include="proyectos/$PROYECTO/**,banco/**"
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Instalar ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Instalar dependencias (PyTorch CPU + Whisper)
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -r requirements.txt
+      - name: Renderizar
+        run: python pipeline/render.py "$PROYECTO"
+      - name: Subir resultado
+        uses: actions/upload-artifact@v7
+        with:
+          name: video-${{ inputs.proyecto }}
+          path: proyectos/${{ inputs.proyecto }}/salida/
+          retention-days: 14

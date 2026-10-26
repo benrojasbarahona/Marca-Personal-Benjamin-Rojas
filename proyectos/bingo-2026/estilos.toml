@@ -1,0 +1,23 @@
+# Valores de partida, todos ajustables. Tamaños y márgenes son px reales sobre el tamaño de salida.
+# fuente_nombre es el nombre de FAMILIA de una fuente que esté en fuentes/.
+
+[cine]
+fuente_nombre = "Arimo"     # equivalente libre de Arial (ver README)
+modo = "contorno"
+color = "#FFE066"           # amarillento (ajustable)
+color_contorno = "#000000"
+grosor_contorno = 3
+tamano = 64
+margen_vertical = 70
+negrita = false
+
+[tiktok]
+fuente_nombre = "Bebas Neue"
+modo = "caja"               # cuadro de fondo detrás de cada bloque de palabras
+color = "#FFFFFF"
+color_caja = "#1A1A1A"
+relleno_caja = 12
+palabras_por_bloque = 2
+tamano = 96
+margen_vertical = 300
+negrita = false

@@ -1,0 +1,29 @@
+# Rutas: se buscan primero dentro de esta carpeta y, si no existen, desde la raíz del repo
+# (por eso "banco/musica/tema.mp3" funciona desde cualquier proyecto).
+
+[salida]
+nombre = "video.mp4"
+ancho = 1920          # PENDIENTE: marcador, confirmar formato del proyecto
+alto = 1080           # PENDIENTE: marcador, confirmar formato del proyecto
+fps = 30
+
+[clips]
+# Opcional. Si se omite, se usan todos los videos de media/ en orden natural (video2 antes que video10).
+# orden = ["video1.mp4", "video2.mp4"]
+
+[subtitulos]
+activar = true
+estilo = "cine"       # "cine" o "tiktok" (definidos en estilos.toml)
+idioma = "es"
+modelo = "small"      # tiny, base, small, medium (más grande = más preciso y más lento)
+
+[banner]
+archivo = "media/banner.png"   # dejar "" para no poner banner
+posicion = "arriba-derecha"    # arriba-derecha, arriba-izquierda, abajo-derecha, abajo-izquierda
+margen = 40                    # px desde el borde (ajustable)
+ancho = 260                    # px de ancho del banner (ajustable)
+
+[audio]
+musica = ""                    # ej: "banco/musica/tema.mp3"; vacío = sin música
+volumen_musica = 0.3           # ajustable
+volumen_original = 1.0         # ajustable
